@@ -1,44 +1,49 @@
-import image from "./images/WhatsApp Image 2025-04-15 at 10.41.02_5d1d3dec.jpg";
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState } from "react";
 
-function App() {
-  const name = "MIDHUN MOHAN M";
-  const description = "An extra pottential Human Being .";
+function LightSwitch({ isOn, toggleLight }) {
+  return (
+    <button
+      onClick={toggleLight}
+      style={{
+        padding: "10px 20px",
+        backgroundColor: isOn ? "#ff6666" : "#4caf50",
+        color: "white",
+        border: "none",
+        borderRadius: "8px",
+        cursor: "pointer",
+        fontSize: "16px"
+      }}
+    >
+      {isOn ? "Turn OFF" : "Turn ON"}
+    </button>
+  );
+}
 
-  const cardStyle = {
-    width: "320px",
-    border: "2px solid #333",
-    borderRadius: "12px",
-    padding: "20px",
-    backgroundColor: "#f9f9f9",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+function Room() {
+  const [isOn, setIsOn] = useState(false);
+
+  const toggleLight = () => {
+    setIsOn((prev) => !prev);
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div style={cardStyle} className="text-center">
-        {/* ✅ Internal image from public folder */}
-        <img
-          src={image}
-          alt="Profile"
-          className="img-fluid rounded-circle mb-3"
-          width="120"
-        />
-
-        <h3 className="fw-bold">{name}</h3>
-        <p>{description}</p>
-
-        {/* ✅ External image (via internet link) */}
-        <img
-          src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c4a973548e0205b87fbca992"
-          alt="External Profile"
-          className="img-fluid rounded-circle mt-3"
-          width="80"
-        />
-      </div>
+    <div
+      style={{
+        textAlign: "center",
+        marginTop: "100px",
+        padding: "40px",
+        borderRadius: "10px",
+        backgroundColor: isOn ? "#fff9c4" : "#2c3e50",
+        color: isOn ? "#000" : "#fff",
+        width: "300px",
+        margin: "100px auto",
+        boxShadow: "0 4px 8px rgba(0,0,0,0.2)"
+      }}
+    >
+      <h2>{isOn ? "The room is bright" : "The room is dark"}</h2>
+      <LightSwitch isOn={isOn} toggleLight={toggleLight} />
     </div>
   );
 }
 
-export default App;
+export default Room;
